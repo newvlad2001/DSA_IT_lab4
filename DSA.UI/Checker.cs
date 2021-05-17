@@ -41,11 +41,11 @@ namespace DSA.UI
             return true;
         }
 
-        public static bool CheckIsInInterval(string leftPart, string rightPart, string valueStr)
+        public static bool CheckIsInInterval(string leftBound, string rightBound, string valueStr)
         {
             BigInteger value = BigInteger.Parse(valueStr);
-            BigInteger right = BigInteger.Parse(rightPart);
-            BigInteger left = BigInteger.Parse(leftPart);
+            BigInteger right = BigInteger.Parse(rightBound);
+            BigInteger left = BigInteger.Parse(leftBound);
            
             if (value < left || value > right)
             {
