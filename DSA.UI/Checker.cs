@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Numerics;
+using Helper;
 
 namespace DSA.UI
 {
     public static class Checker
     {
+        public static bool CheckQ(string qStr)
+        {
+            return HelperFunctions.FermaPrimeTest(BigInteger.Parse(qStr));
+        }
+        
         public static bool CheckP(string qStr, string pStr)
         {
             BigInteger p = BigInteger.Parse(pStr);
-            if (!FermaPrimeTest(p))
+            if (!HelperFunctions.FermaPrimeTest(p))
             {
                 return false;
             }
@@ -30,7 +32,7 @@ namespace DSA.UI
             }
 
             BigInteger q = BigInteger.Parse(qStr);
-            BigInteger g = FastExp(h, (p - 1) / q, p);
+            BigInteger g = HelperFunctions.FastExp(h, (p - 1) / q, p);
             if (g < 1)
             {
                 return false;
@@ -51,41 +53,6 @@ namespace DSA.UI
             }
 
             return true;
-        }
-
-        public static bool FermaPrimeTest(BigInteger x)
-        {
-            Random rand = new Random();
-            for (int i = 0; i < 100; i++)
-            {
-                BigInteger a = rand.Next() % (x - 2) + 2;
-                
-                if (FastExp(a, x - 1, x) != 1)
-                {
-                    Console.WriteLine($"EXP {a}");
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private static BigInteger FastExp(BigInteger number, BigInteger power, BigInteger mod)
-        {
-            BigInteger x = 1;
-            while (power != 0)
-            {
-                while (power % 2 == 0)
-                {
-                    power /= 2;
-                    number = (number * number) % mod;
-                }
-
-                power--;
-                x = (x * number) % mod;
-            }
-
-            return x;
         }
     }
 }

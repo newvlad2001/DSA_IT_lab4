@@ -33,12 +33,12 @@ namespace DSA.UI
 
         private void Sign()
         {
-            if (!IsFieldsFilled("sign"))
+            if (!IsFieldsFilled(true))
             {
                 return;
             }
 
-            if (!IsFieldsFilledCorrectly("sign"))
+            if (!IsFieldsFilledCorrectly(true))
             {
                 return;
             }
@@ -72,12 +72,12 @@ namespace DSA.UI
 
         private void Check()
         {
-            if (!IsFieldsFilled("check"))
+            if (!IsFieldsFilled(false))
             {
                 return;
             }
 
-            if (!IsFieldsFilledCorrectly("check"))
+            if (!IsFieldsFilledCorrectly(false))
             {
                 return;
             }
@@ -101,15 +101,15 @@ namespace DSA.UI
                 return;
             }
 
-            byte[] initialMsg = Encoding.ASCII.GetBytes(msg);
+            byte[] input = Encoding.ASCII.GetBytes(msg);
 
-            HashTextBox.Text = SHA1.GetHash(initialMsg).ToString();
+            HashTextBox.Text = SHA1.GetHash(input).ToString();
             RTextBox.Text = r.ToString();
             STextBox.Text = s.ToString();
 
             string result;
             MessageBoxImage image;
-            if (Signer.CheckSign(initialMsg, r, s, q, p, h, x, out BigInteger v))
+            if (Signer.CheckSign(input, r, s, q, p, h, x, out BigInteger v))
             {
                 result = "EQUAL";
                 image = MessageBoxImage.Information;
@@ -180,7 +180,7 @@ namespace DSA.UI
             }
         }
 
-        private bool IsFieldsFilled(string action)
+        private bool IsFieldsFilled(bool isSigning)
         {
             if (QTextBox.Text == "" || PTextBox.Text == "" || HTextBox.Text == "" ||
                 XTextBox.Text == "" || FilePathTextBox.Text == "")
@@ -190,7 +190,7 @@ namespace DSA.UI
                 return false;
             }
 
-            if (action == "sign" && KTextBox.Text == "")
+            if (isSigning && KTextBox.Text == "")
             {
                 MessageBox.Show("Please, fill all input fields!", "Error with input values",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
@@ -200,10 +200,10 @@ namespace DSA.UI
             return true;
         }
 
-        private bool IsFieldsFilledCorrectly(string action)
+        private bool IsFieldsFilledCorrectly(bool isSigning)
         {
             bool isValid = true;
-            if (!Checker.FermaPrimeTest(BigInteger.Parse(QTextBox.Text)))
+            if (!Checker.CheckQ(QTextBox.Text))
             {
                 MessageBox.Show("Q value must be prime.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 isValid = false;
@@ -229,7 +229,7 @@ namespace DSA.UI
                 isValid = false;
             }
 
-            if (action == "sign" && !Checker.CheckIsInInterval("0", QTextBox.Text, KTextBox.Text))
+            if (isSigning && !Checker.CheckIsInInterval("0", QTextBox.Text, KTextBox.Text))
             {
                 MessageBox.Show("K value must be in (0; q)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 isValid = false;

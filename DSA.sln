@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA.UI", "DSA.UI\DSA.UI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashAlgorithms", "HashAlgorithms\HashAlgorithms.csproj", "{CCE7AB70-7A6F-4C22-BFEE-DBA92F3413ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{B29A186C-A77D-4A38-9C5A-A7FEB9E9F214}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CCE7AB70-7A6F-4C22-BFEE-DBA92F3413ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCE7AB70-7A6F-4C22-BFEE-DBA92F3413ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCE7AB70-7A6F-4C22-BFEE-DBA92F3413ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29A186C-A77D-4A38-9C5A-A7FEB9E9F214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29A186C-A77D-4A38-9C5A-A7FEB9E9F214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29A186C-A77D-4A38-9C5A-A7FEB9E9F214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29A186C-A77D-4A38-9C5A-A7FEB9E9F214}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

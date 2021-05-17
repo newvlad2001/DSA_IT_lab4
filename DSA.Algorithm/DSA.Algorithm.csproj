@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HashAlgorithms\HashAlgorithms.csproj" />
+    <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 
 </Project>
